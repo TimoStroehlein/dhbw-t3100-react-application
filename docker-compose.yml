@@ -24,6 +24,8 @@ services:
 
   dhbw-t3100-postgres:
     image: "postgres:latest"
+    env_file:
+      - .env
     volumes:
     - database:/var/lib/postgres/data
     - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -36,8 +38,28 @@ services:
     networks:
       development:
 
+  dhbw-t3100-pgadmin:
+    image: dpage/pgadmin4
+    env_file:
+      - .env
+    volumes:
+      - pgadmin:/var/lib/pgadmin4/storage
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_LISTEN_PORT: 5050
+    ports:
+      - "5050:5050"
+    depends_on:
+      - dhbw-t3100-postgres
+    links:
+      - dhbw-t3100-postgres
+    networks:
+      development:
+
 volumes:
   database:
+  pgadmin:
 
 networks:
   development:
