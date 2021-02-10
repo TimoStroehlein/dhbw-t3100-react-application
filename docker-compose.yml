@@ -3,6 +3,7 @@ services:
   dhbw-t3100-frontend:
     build: ./frontend
     image: dhbw-t3100-frontend
+    container_name: dhbw-t3100-frontend
     command: npm run start
     env_file:
       - .env
@@ -14,6 +15,7 @@ services:
   dhbw-t3100-backend:
     build: ./backend
     image: dhbw-t3100-backend
+    container_name: dhbw-t3100-backend
     command: npm run start
     env_file:
       - .env
@@ -24,6 +26,7 @@ services:
 
   dhbw-t3100-postgres:
     image: "postgres:latest"
+    container_name: dhbw-t3100-postgres
     env_file:
       - .env
     volumes:
@@ -40,6 +43,7 @@ services:
 
   dhbw-t3100-pgadmin:
     image: dpage/pgadmin4:4.25
+    container_name: dhbw-t3100-pgadmin
     env_file:
       - .env
     volumes:
@@ -57,8 +61,41 @@ services:
     networks:
       development:
 
+  dhbw-t3100-mongo:
+    image: mongo
+    container_name: dhbw-t3100-mongo
+    ports:
+      - "27017:27017"
+    volumes: 
+      - mongo:/data/mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: dhbw-t3100-react-application
+    networks:
+      development:
+
+  dhbw-t3100-mongo-express:
+    image: mongo-express
+    container_name: dhbw-t3100-mongo-express
+    environment:
+      ME_CONFIG_MONGODB_SERVER: dhbw-t3100-mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
+      ME_CONFIG_MONGODB_AUTH_USERNAME: ${MONGO_ROOT_USER}
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_EXPRESS_LOGIN}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASSWORD}
+    depends_on:
+      - dhbw-t3100-mongo
+    ports:
+      - "8081:8081"
+    networks:
+      development:
+
 volumes:
   database:
+  mongo:
   pgadmin:
 
 networks:
