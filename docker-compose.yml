@@ -39,7 +39,7 @@ services:
       development:
 
   dhbw-t3100-pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:4.25
     env_file:
       - .env
     volumes:
@@ -47,9 +47,9 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-      PGADMIN_LISTEN_PORT: 5050
+      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
     ports:
-      - "5050:5050"
+      - "${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}"
     depends_on:
       - dhbw-t3100-postgres
     links:
