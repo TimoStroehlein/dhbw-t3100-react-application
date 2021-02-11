@@ -1,12 +1,14 @@
-version: '3'
+version: '3.3'
 services:
   dhbw-t3100-frontend:
     build: ./frontend
     image: dhbw-t3100-frontend
     container_name: dhbw-t3100-frontend
     command: npm run start
-    env_file:
-      - .env
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /usr/src/app/
     ports:
       - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     networks:
@@ -17,8 +19,10 @@ services:
     image: dhbw-t3100-backend
     container_name: dhbw-t3100-backend
     command: npm run start
-    env_file:
-      - .env
+    volumes:
+      - type: bind
+        source: ./backend
+        target: /usr/src/app/
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     networks:
