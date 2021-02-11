@@ -59,9 +59,7 @@ services:
       development:
 
 volumes:
-  database:
   mongo:
-  pgadmin:
 
 networks:
   development:
