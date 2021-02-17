@@ -11,12 +11,16 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker --version
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
-  - docker-compose up -d --build
+  - docker-compose build --pull
+  - docker-compose push
+  - docker-compose up -d
 
 after_script:
   - docker-compose down
+  - docker logout
 
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh

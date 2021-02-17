@@ -2,7 +2,7 @@ version: '3.3'
 services:
   dhbw-t3100-frontend:
     build: ./frontend
-    image: dhbw-t3100-frontend
+    image: timostroehlein/dhbw-t3100-frontend
     container_name: dhbw-t3100-frontend
     command: npm run start
     volumes:
@@ -16,7 +16,7 @@ services:
 
   dhbw-t3100-backend:
     build: ./backend
-    image: dhbw-t3100-backend
+    image: timostroehlein/dhbw-t3100-backend
     container_name: dhbw-t3100-backend
     command: npm run start
     volumes:
