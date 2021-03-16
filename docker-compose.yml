@@ -10,7 +10,7 @@ services:
         source: ./frontend
         target: /usr/src/app/
     ports:
-      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+      - "${FRONTEND_PORT}:3000"
     networks:
       development:
 
@@ -24,7 +24,7 @@ services:
         source: ./backend
         target: /usr/src/app/
     ports:
-      - "${BACKEND_PORT}:${BACKEND_PORT}"
+      - "${BACKEND_PORT}:8080"
     networks:
       development:
 
@@ -32,7 +32,7 @@ services:
     image: mongo
     container_name: dhbw-t3100-mongo
     ports:
-      - "${MONGO_PORT}:${MONGO_PORT}"
+      - "${MONGO_PORT}:27017"
     volumes: 
       - mongo:/data/mongodb
       - ./db/init.js:/docker-entrypoint-initdb.d/init.js
@@ -48,7 +48,7 @@ services:
     container_name: dhbw-t3100-mongo-express
     environment:
       ME_CONFIG_MONGODB_SERVER: dhbw-t3100-mongo
-      ME_CONFIG_MONGODB_PORT: ${MONGO_PORT}
+      ME_CONFIG_MONGODB_PORT: 27017
       ME_CONFIG_MONGODB_ENABLE_ADMIN: ${MONGO_EXPRESS_ENABLE_ADMIN}
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_EXPRESS_ADMIN_USER}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_EXPRESS_ADMIN_PASSWORD}
@@ -58,7 +58,7 @@ services:
     depends_on:
       - dhbw-t3100-mongo
     ports:
-      - "8081:8081"
+      - "${MONGO_EXPRESS_PORT}:8081"
     networks:
       development:
 
