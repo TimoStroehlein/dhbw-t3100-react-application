@@ -62,6 +62,26 @@ services:
     networks:
       development:
 
+  dhbw-t3100-gitlab:
+    image: "gitlab/gitlab-ee:latest"
+    container_name: dhbw-t3100-gitlab
+    restart: always
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://3epadlwylo6zf0ac.myfritz.net:50080'
+        letsencrypt['enable'] = false
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - "50080:50080"
+      - "50443:443"
+      - "50022:22"
+    volumes:
+      - "$GITLAB_HOME/config:/etc/gitlab"
+      - "$GITLAB_HOME/logs:/var/log/gitlab"
+      - "$GITLAB_HOME/data:/var/opt/gitlab"
+    networks:
+      development:
+
 volumes:
   mongo:
 
