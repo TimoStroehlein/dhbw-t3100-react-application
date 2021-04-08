@@ -21,9 +21,10 @@
 #    paths: [gl-sast-container-report.json]
 
 include:
+  - template: Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
 
 variables:
   SAST_DISABLE_DIND: "true"
   SEARCH_MAX_DEPTH: 10
-  SAST_DEFAULT_ANALYZERS: "eslint, nodejs-scan"
+  SAST_DEFAULT_ANALYZERS: "tslint, eslint, nodejs-scan"
