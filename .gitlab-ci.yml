@@ -1,23 +1,29 @@
-sast:
-  image: docker:latest
-  variables:
-    DOCKER_DRIVER: overlay2
-    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
-    CI_APPLICATION_TAG: $CI_COMMIT_SHA
-  allow_failure: true
-  services:
-    - docker:dind
-  script:
-    - docker run -d --name db arminc/clair-db:latest
-    - docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:v2.0.1
-    - apk add -U wget ca-certificates
-    - docker pull ${CI_APPLICATION_REPOSITORY}:${CI_APPLICATION_TAG}
-    - wget https://github.com/arminc/clair-scanner/releases/download/v8/clair-scanner_linux_amd64
-    - mv clair-scanner_linux_amd64 clair-scanner
-    - chmod +x clair-scanner
-    - touch clair-whitelist.yml
-    - ./clair-scanner -c http://docker:6060 --ip $(hostname -i) -r gl-sast-container-report.json -l clair.log -w clair-whitelist.yml ${CI_APPLICATION_REPOSITORY}:${CI_APPLICATION_TAG} || true
-  artifacts:
-    paths: [gl-sast-container-report.json]
+#sast:
+#  image: docker:latest
+#  variables:
+#    DOCKER_DRIVER: overlay2
+#    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+#    CI_APPLICATION_TAG: $CI_COMMIT_SHA
+#  allow_failure: true
+#  services:
+#    - docker:dind
+#  script:
+#    - docker run -d --name db arminc/clair-db:latest
+#    - docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:v2.0.1
+#    - apk add -U wget ca-certificates
+#    - docker pull ${CI_APPLICATION_REPOSITORY}:${CI_APPLICATION_TAG}
+#    - wget https://github.com/arminc/clair-scanner/releases/download/v8/clair-scanner_linux_amd64
+#    - mv clair-scanner_linux_amd64 clair-scanner
+#    - chmod +x clair-scanner
+#    - touch clair-whitelist.yml
+#    - ./clair-scanner -c http://docker:6060 --ip $(hostname -i) -r gl-sast-container-report.json -l clair.log -w clair-whitelist.yml ${CI_APPLICATION_REPOSITORY}:${CI_APPLICATION_TAG} || true
+#  artifacts:
+#    paths: [gl-sast-container-report.json]
 
-#  - template: Security/SAST.gitlab-ci.yml
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+variables:
+  SAST_DISABLE_DIND: "true"
+  SEARCH_MAX_DEPTH: 10
+  SAST_DEFAULT_ANALYZERS: "eslint, nodejs-scan"
