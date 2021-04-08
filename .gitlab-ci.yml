@@ -17,7 +17,8 @@ sast:
     - mv clair-scanner_linux_amd64 clair-scanner
     - chmod +x clair-scanner
     - touch clair-whitelist.yml
-    - ./clair-scanner -c http://docker:6060 --ip $(hostname -i) -r gl-sast-container-report.json -l clair.log -w clair-whitelist.yml ${CI_REGISTRY_IMAGE} || true
+    - HOST_IP=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
+    - ./clair-scanner -c http://docker:6060 --ip ${HOST_IP} -r gl-sast-container-report.json -l clair.log -w clair-whitelist.yml ${CI_REGISTRY_IMAGE} || true
   after_script:
     - docker rm -f db
     - docker rm -f clair
