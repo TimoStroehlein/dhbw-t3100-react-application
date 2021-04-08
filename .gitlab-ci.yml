@@ -6,6 +6,9 @@ sast:
   allow_failure: true
   services:
     - docker:stable-dind
+  before_script:
+    - docker stop $(docker ps -a -q)
+    - docker rm $(docker ps -a -q)
   script:
     - docker run -d --name db arminc/clair-db:latest
     - docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:v2.0.1
@@ -16,6 +19,9 @@ sast:
     - chmod +x clair-scanner
     - touch clair-whitelist.yml
     - ./clair-scanner -c http://docker:6060 --ip $(hostname -i) -r gl-sast-container-report.json -l clair.log -w clair-whitelist.yml ${CI_APPLICATION_REPOSITORY}:${CI_APPLICATION_TAG} || true
+  after_script:
+    - docker stop $(docker ps -a -q)
+    - docker rm $(docker ps -a -q)
   artifacts:
     paths: [gl-sast-container-report.json]
 
