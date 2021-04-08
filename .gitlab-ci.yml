@@ -19,7 +19,7 @@ sast:
     - touch clair-whitelist.yml
     # ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+'
     - ./clair-scanner -c http://clair:6060 --ip clair -r gl-sast-container-report.json -l clair.log -w clair-whitelist.yml ${CI_REGISTRY_IMAGE} || true
-  #after_script:
+  after_script:
     - docker rm -f db
     - docker rm -f clair
   artifacts:
