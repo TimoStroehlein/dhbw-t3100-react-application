@@ -1,32 +1,5 @@
-# https://gitlab.tu-berlin.de/help/ci/examples/sast_docker.md
-
-sast:
-  image: docker:stable
-  variables:
-    DOCKER_DRIVER: overlay2
-    CI_REGISTRY_IMAGE: $CI_REGISTRY_IMAGE
-  allow_failure: true
-  services:
-    - docker:stable-dind
-  script:
-    - docker run -d --name db arminc/clair-db:latest
-    - docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:v2.0.1
-    - apk add -U wget ca-certificates
-    - docker pull ${CI_REGISTRY_IMAGE}
-    - wget https://github.com/arminc/clair-scanner/releases/download/v8/clair-scanner_linux_amd64
-    - mv clair-scanner_linux_amd64 clair-scanner
-    - chmod +x clair-scanner
-    - touch clair-whitelist.yml
-    # ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+'
-    - ./clair-scanner -c http://clair:6060 --ip clair -r gl-sast-container-report.json -l clair.log -w clair-whitelist.yml ${CI_REGISTRY_IMAGE} || true
-  after_script:
-    - docker rm -f db
-    - docker rm -f clair
-  artifacts:
-    paths: [gl-sast-container-report.json]
-
 sonarqube-check:
-  image: 
+  image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
   variables:
