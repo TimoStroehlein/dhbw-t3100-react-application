@@ -5,7 +5,7 @@ import './styles.scss';
 import {SettingsScreen} from '../screens/Settings';
 import {HomeScreen} from '../screens/Home';
 import {HelpScreen} from '../screens/Help';
-import {SASTVulnerability1Screen} from '../screens/SAST/Vulnerability1';
+import {SASTVulnerability1Screen} from '../screens/SAST/CodeInjection';
 import {SASTVulnerability2Screen} from '../screens/SAST/Vulnerability2';
 import {SASTVulnerability3Screen} from '../screens/SAST/Vulnerability3';
 import {DASTVulnerability1Screen} from '../screens/DAST/Vulnerability1';

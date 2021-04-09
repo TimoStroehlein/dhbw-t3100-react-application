@@ -6,7 +6,7 @@ export const SASTVulnerability1Screen = (): JSX.Element => {
     return (
         <Container>
             <Header>
-                <h2>SAST - Vulnerability 1</h2>
+                <h2>SAST - Code Injection</h2>
             </Header>
             <Content>
                 <p>Content</p>
