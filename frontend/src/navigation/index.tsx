@@ -5,9 +5,9 @@ import './styles.scss';
 import {SettingsScreen} from '../screens/Settings';
 import {HomeScreen} from '../screens/Home';
 import {HelpScreen} from '../screens/Help';
-import {SASTVulnerability1Screen} from '../screens/SAST/CodeInjection';
-import {SASTVulnerability2Screen} from '../screens/SAST/Vulnerability2';
-import {SASTVulnerability3Screen} from '../screens/SAST/Vulnerability3';
+import {SASTCodeInjection} from '../screens/SAST/CodeInjection';
+import {SASTPathTraversal} from '../screens/SAST/PathTraversal';
+import {SASTImproperInputValidation} from '../screens/SAST/ImproperInputValidation';
 import {DASTVulnerability1Screen} from '../screens/DAST/Vulnerability1';
 import {DASTVulnerability2Screen} from '../screens/DAST/Vulnerability2';
 import {DASTVulnerability3Screen} from '../screens/DAST/Vulnerability3';
@@ -18,14 +18,14 @@ const Routes = (): JSX.Element => {
             <Route exact path="/">
                 <HomeScreen/>
             </Route>
-            <Route path="/sast/vulnerability-1">
-                <SASTVulnerability1Screen/>
+            <Route path="/sast/code-injection">
+                <SASTCodeInjection/>
             </Route>
-            <Route path="/sast/vulnerability-2">
-                <SASTVulnerability2Screen/>
+            <Route path="/sast/improper-input-validation">
+                <SASTImproperInputValidation/>
             </Route>
-            <Route path="/sast/vulnerability-3">
-                <SASTVulnerability3Screen/>
+            <Route path="/sast/path-traversal">
+                <SASTPathTraversal/>
             </Route>
             <Route path="/dast/vulnerability-1">
                 <DASTVulnerability1Screen/>
@@ -114,11 +114,11 @@ export const NavigationSidebar = (): JSX.Element => {
                                         <Dropdown.Item componentClass={Link} to="/sast/code-injection" eventKey="2-1">
                                             Code Injection
                                         </Dropdown.Item>
-                                        <Dropdown.Item componentClass={Link} to="/sast/vulnerability-2" eventKey="2-2">
-                                            Vulnerability 2
+                                        <Dropdown.Item componentClass={Link} to="/sast/improper-input-validation" eventKey="2-2">
+                                            Improper Input Validation
                                         </Dropdown.Item>
-                                        <Dropdown.Item componentClass={Link} to="/sast/vulnerability-3" eventKey="2-3">
-                                            Vulnerability 3
+                                        <Dropdown.Item componentClass={Link} to="/sast/path-traversal" eventKey="2-3">
+                                            Path Traversal
                                         </Dropdown.Item>
                                     </Dropdown>
                                     <Dropdown

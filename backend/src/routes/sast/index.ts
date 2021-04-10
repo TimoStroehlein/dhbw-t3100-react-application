@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import {addUser, getUser, getUser2, mongoDb} from '../../services/mongodb';
 import * as users from '../../data/sast/users.json';
-import {Users} from '../../models/user.types';
+import {Users} from '../../models/user';
 
 export const router = Router()
 

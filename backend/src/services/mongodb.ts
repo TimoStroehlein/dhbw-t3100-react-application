@@ -1,5 +1,5 @@
 import {Db, InsertWriteOpResult, MongoClient, MongoError} from 'mongodb';
-import {User, Users} from '../models/user.types';
+import {User, Users} from '../models/user';
 import * as jsonUsers from '../data/sast/users.json';
 
 export const mongoClient = (): MongoClient => {
