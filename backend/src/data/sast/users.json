@@ -1,16 +1,24 @@
 {
   "users": [
     {
+      "username": "admin",
+      "age": null,
+      "password": "kldjkdfjkdf"
+    },
+    {
       "username": "Hans",
-      "age": 30
+      "age": 30,
+      "password": "mkfsfklfsdl"
     },
     {
       "username": "Bernd",
-      "age": 25
+      "age": 25,
+      "password": "dsnndfkngdf"
     },
     {
       "username": "Manfred",
-      "age": 40
+      "age": 40,
+      "password": "nkfsdnjdsfkn"
     }
   ]
 }
