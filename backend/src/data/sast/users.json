@@ -1,14 +1,16 @@
-[
-  {
-    "username": "Hans",
-    "age": 30
-  },
-  {
-    "username": "Bernd",
-    "age": 25
-  },
-  {
-    "username": "Manfred",
-    "age": 40
-  }
-]
+{
+  "users": [
+    {
+      "username": "Hans",
+      "age": 30
+    },
+    {
+      "username": "Bernd",
+      "age": 25
+    },
+    {
+      "username": "Manfred",
+      "age": 40
+    }
+  ]
+}

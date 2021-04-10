@@ -1,4 +1,5 @@
-import {Db, MongoClient} from 'mongodb';
+import {Db, InsertWriteOpResult, MongoClient} from 'mongodb';
+import {User, Users} from '../models/user.types';
 
 // Setup MongoDB
 export const mongodbClient = (): MongoClient => {
@@ -7,7 +8,7 @@ export const mongodbClient = (): MongoClient => {
     return new MongoClient(DB_URI, { useUnifiedTopology: true });
 }
 
-export const getUser = (db: Db, username: string, callback: (cards: any[]) => void): void => {
+export const getUser = (db: Db, username: string, callback: (cards: User[]) => void): void => {
     const collection = db.collection('users');
     collection.find({$where: `this.username == '${username}'`}).toArray((err, users) => {
         if (err) {
@@ -17,9 +18,16 @@ export const getUser = (db: Db, username: string, callback: (cards: any[]) => vo
     });
 }
 
-export const addUser = (db: Db, users: any[], callback: (result: any) => void): void => {
+export const addUser = (db: Db, users: Users, callback: (result: InsertWriteOpResult<any>) => void): void => {
     const collection = db.collection('users');
-    collection.insertMany(users, (err, result) => {
+    collection.deleteMany({}, (err, result) => {
+        if (err) {
+            console.log('An error occurred.\n', err);
+            return;
+        }
+        console.log(`Successfully removed ${result.result.n} documents.`);
+    });
+    collection.insertMany(users.users, (err, result) => {
         if (err) {
             console.log('An error occurred.\n', err);
         }

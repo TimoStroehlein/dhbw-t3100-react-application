@@ -111,8 +111,8 @@ export const NavigationSidebar = (): JSX.Element => {
                                         icon={<Icon icon="code" />}
                                         placement="rightStart"
                                     >
-                                        <Dropdown.Item componentClass={Link} to="/sast/vulnerability-1" eventKey="2-1">
-                                            Vulnerability 1
+                                        <Dropdown.Item componentClass={Link} to="/sast/code-injection" eventKey="2-1">
+                                            Code Injection
                                         </Dropdown.Item>
                                         <Dropdown.Item componentClass={Link} to="/sast/vulnerability-2" eventKey="2-2">
                                             Vulnerability 2
