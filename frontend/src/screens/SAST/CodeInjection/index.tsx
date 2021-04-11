@@ -1,8 +1,21 @@
-import {Container, FlexboxGrid, Content, Header, Row, Col, Input, Button} from 'rsuite';
-import React from 'react';
+import {Container, FlexboxGrid, Content, Header, Row, Col, Input, Button, List} from 'rsuite';
+import React, {useState} from 'react';
 import './styles.scss';
+import {getOrders} from '../../../services/orders';
+import {Order} from '../../../models/order.type';
 
 export const SASTCodeInjection = (): JSX.Element => {
+    const [username, setUsername] = useState('');
+    const [orderNumber, setOrderNumber] = useState('');
+    const [orders, setOrders] = useState(Array<Order>());
+
+    const fetchOrders = async () => {
+        console.log('Test 1');
+        const orders = await getOrders(username, orderNumber)
+        console.log('Test 2');
+        setOrders(orders);
+    }
+
     return (
         <Container>
             <Header>
@@ -35,11 +48,34 @@ export const SASTCodeInjection = (): JSX.Element => {
                 <FlexboxGrid justify="center" className="content-grid">
                     <FlexboxGrid.Item colspan={8}>
                         <h3>Orders</h3>
-                        <Input placeholder="Username" className="input"/>
-                        <Input placeholder="Password" className="input"/>
-                        <Button appearance="primary" className="button">Submit</Button>
+                        <Input placeholder="Username"
+                               className="input"
+                               onChange={(value) => setUsername(value)}/>
+                        <Input placeholder="Order Number"
+                               className="input"
+                               onChange={(value) => setOrderNumber(value)}/>
+                        <Button appearance="primary"
+                                className="button"
+                                onClick={() => fetchOrders()}>
+                            Submit
+                        </Button>
                     </FlexboxGrid.Item>
                 </FlexboxGrid>
+                <hr/>
+                <List>
+                    {orders.map((order) => (
+                        <List.Item>
+                            <FlexboxGrid justify="center">
+                                <FlexboxGrid.Item colspan={4}>
+                                    {order.username}
+                                </FlexboxGrid.Item>
+                                <FlexboxGrid.Item colspan={4}>
+                                    {order.orderNumber}
+                                </FlexboxGrid.Item>
+                            </FlexboxGrid>
+                        </List.Item>
+                    ))}
+                </List>
             </Content>
         </Container>
     );

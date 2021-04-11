@@ -1,21 +1,21 @@
 import {Router} from 'express';
-import {addUser, getUser, getUser2, mongoDb} from '../../services/mongodb';
-import * as users from '../../data/sast/users.json';
-import {Users} from '../../models/user';
+import {addOrder, getOrder, getOrder2, mongoDb} from '../../services/mongodb';
+import * as orders from '../../data/sast/orders.json';
+import {Order, Orders} from '../../models/order';
 
 export const router = Router()
 
-router.route('/user')
+router.route('/orders')
     .get((req, res) => {
         const username = req.query.username as string;
-        const password = req.query.password as string;
+        const orderNumber = req.query.orderNumber as string;
         mongoDb((db, err) => {
             if (err) {
                 res.json(err);
             } else if (db) {
-                getUser(db, username, password, (cards: any[]) => {
+                getOrder(db, username, orderNumber, (orders: any[]) => {
                     res.header('Access-Control-Allow-Origin', '*');
-                    res.json({'users': cards})
+                    res.json({'orders': orders})
                 });
             }
         });
@@ -25,24 +25,24 @@ router.route('/user')
             if (err) {
                 res.json(err);
             } else if (db) {
-                addUser(db, users as Users, (result: any) => {
+                addOrder(db, orders as Orders, (result: any) => {
                     res.json({'message': `Successfully inserted ${result.result.n} documents.`});
                 });
             }
         });
     });
 
-router.route('/user2')
+router.route('/orders2')
     .get((req, res) => {
         const username = req.query.username as string;
-        const password = req.query.password as string;
+        const orderNumber = req.query.orderNumber as string;
         mongoDb((db, err) => {
             if (err) {
                 res.json(err);
             } else if (db) {
-                getUser2(db, username, password, (cards: any[]) => {
+                getOrder2(db, username, orderNumber, (orders: Order[]) => {
                     res.header('Access-Control-Allow-Origin', '*');
-                    res.json({'users': cards})
+                    res.json({'orders': orders})
                 });
             }
         });
