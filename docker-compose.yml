@@ -23,6 +23,12 @@ services:
       - type: bind
         source: ./backend
         target: /usr/src/app/
+    environment:
+      MONGO_INITDB_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INIT_DATABASE}
+      MONGO_HOSTNAME: dhbw-t3100-mongo
+      MONGO_PORT: 27017
     ports:
       - "${BACKEND_PORT}:8080"
     networks:
@@ -59,26 +65,6 @@ services:
       - dhbw-t3100-mongo
     ports:
       - "${MONGO_EXPRESS_PORT}:8081"
-    networks:
-      development:
-
-  dhbw-t3100-gitlab:
-    image: "gitlab/gitlab-ee:latest"
-    container_name: dhbw-t3100-gitlab
-    restart: always
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://3epadlwylo6zf0ac.myfritz.net:50080'
-        letsencrypt['enable'] = false
-        # Add any other gitlab.rb configuration here, each on its own line
-    ports:
-      - "50080:50080"
-      - "50443:443"
-      - "50022:22"
-    volumes:
-      - "$GITLAB_HOME/config:/etc/gitlab"
-      - "$GITLAB_HOME/logs:/var/log/gitlab"
-      - "$GITLAB_HOME/data:/var/opt/gitlab"
     networks:
       development:
 
