@@ -1,7 +1,7 @@
-import {Container, FlexboxGrid, Content, Header, Row, Col, Input, Button, List} from 'rsuite';
+import {Container, FlexboxGrid, Content, Header, Row, Col, Input, Button, List, Notification} from 'rsuite';
 import React, {useState} from 'react';
 import './styles.scss';
-import {getOrders} from '../../../services/orders';
+import {postOrders, getOrders} from '../../../services/orders';
 import {Order} from '../../../models/order.type';
 
 export const SASTCodeInjection = (): JSX.Element => {
@@ -9,10 +9,16 @@ export const SASTCodeInjection = (): JSX.Element => {
     const [orderNumber, setOrderNumber] = useState('');
     const [orders, setOrders] = useState(Array<Order>());
 
+    const addOrders = async () => {
+        await postOrders();
+        Notification['success']({
+            title: 'Success',
+            description: 'Data successfully added to the database.'
+        });
+    }
+
     const fetchOrders = async () => {
-        console.log('Test 1');
         const orders = await getOrders(username, orderNumber)
-        console.log('Test 2');
         setOrders(orders);
     }
 
@@ -44,6 +50,17 @@ export const SASTCodeInjection = (): JSX.Element => {
                 </Row>
             </Header>
             <Content>
+                <hr/>
+                <div className="content-grid">
+                    <h4>Data</h4>
+                    <p><b>Username:</b> admin</p>
+                    <p><b>Order Number:</b> kldjkdfjkdf</p>
+                    <Button appearance="primary"
+                            className="button"
+                            onClick={() => addOrders()}>
+                        Add predefined Data
+                    </Button>
+                </div>
                 <hr/>
                 <FlexboxGrid justify="center" className="content-grid">
                     <FlexboxGrid.Item colspan={8}>

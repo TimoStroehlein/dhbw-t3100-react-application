@@ -1,8 +1,15 @@
-import {Col, Container, Content, Header, Row} from 'rsuite';
-import React from 'react';
+import {Button, Col, Container, Content, FlexboxGrid, Header, Input, Row} from 'rsuite';
+import React, {useState} from 'react';
 import './styles.scss';
+import {getOrderPdf} from '../../../services/orders';
 
 export const SASTPathTraversal = (): JSX.Element => {
+    const [orderPdf, setOrderPdf] = useState('');
+
+    const downloadOrderPdf = async () => {
+        await getOrderPdf(orderPdf);
+    }
+
     return (
         <Container>
             <Header>
@@ -24,7 +31,25 @@ export const SASTPathTraversal = (): JSX.Element => {
                 </Row>
             </Header>
             <Content>
-                <p>Content</p>
+                <hr/>
+                <div className="content-grid">
+                    <h4>Data</h4>
+                    <p><b>Order ID:</b> f2e71bcb-152e-4a23-ab72-6d7f6022ed60</p>
+                </div>
+                <hr/>
+                <FlexboxGrid justify="center" className="content-grid">
+                    <FlexboxGrid.Item colspan={8}>
+                        <h3>Order PDF Download</h3>
+                        <Input placeholder="Order ID"
+                               className="input"
+                               onChange={(value) => setOrderPdf(value)}/>
+                        <Button appearance="primary"
+                                className="button"
+                                onClick={() => downloadOrderPdf()}>
+                            Download PDF
+                        </Button>
+                    </FlexboxGrid.Item>
+                </FlexboxGrid>
             </Content>
         </Container>
     );
