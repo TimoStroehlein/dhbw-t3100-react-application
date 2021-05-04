@@ -1,4 +1,4 @@
-import {Button, Col, Container, Content, FlexboxGrid, Header, Input, Row} from 'rsuite';
+import {Button, Col, Container, Content, FlexboxGrid, Header, Input} from 'rsuite';
 import React, {useState} from 'react';
 import './styles.scss';
 import {getOrderPdf} from '../../../services/orders';
@@ -13,22 +13,21 @@ export const SASTPathTraversal = (): JSX.Element => {
     return (
         <Container>
             <Header>
-                <Row>
-                    <Col xs={12}>
+                <FlexboxGrid>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={10}>
                         <h2>
                             SAST - Path Traversal
                         </h2>
-                    </Col>
-                    <Col xs={4} xsPush={8}>
-                        <Row>
-                            <h3>
-                                Rank 12 <a href="https://cwe.mitre.org/data/definitions/22.html"
-                                          target="_blank"
-                                          className="cwe-id">CWE-22</a>
-                            </h3>
-                        </Row>
-                    </Col>
-                </Row>
+                    </FlexboxGrid.Item>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={14} className="cwe-col">
+                        <h3>
+                            <a href="https://cwe.mitre.org/data/definitions/22.html"
+                               target="_blank">CWE-22</a> (Rank 12)&nbsp;
+                            <a href="http://capec.mitre.org/data/definitions/126.html"
+                               target="_blank">CAPEC-126</a>
+                        </h3>
+                    </FlexboxGrid.Item>
+                </FlexboxGrid>
             </Header>
             <Content>
                 <hr/>
@@ -38,8 +37,8 @@ export const SASTPathTraversal = (): JSX.Element => {
                 </div>
                 <hr/>
                 <FlexboxGrid justify="center" className="content-grid">
-                    <FlexboxGrid.Item colspan={8}>
-                        <h3>Order PDF Download</h3>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={12} sm={24}>
+                        <h3>Download Order PDF</h3>
                         <Input placeholder="Order ID"
                                className="input"
                                onChange={(value) => setOrderPdf(value)}/>
