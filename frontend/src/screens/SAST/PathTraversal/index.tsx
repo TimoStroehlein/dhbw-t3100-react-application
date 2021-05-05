@@ -23,7 +23,7 @@ export const SASTPathTraversal = (): JSX.Element => {
                         <h3>
                             <a href="https://cwe.mitre.org/data/definitions/22.html"
                                target="_blank">CWE-22</a> (Rank 12)&nbsp;
-                            <a href="http://capec.mitre.org/data/definitions/126.html"
+                            <a href="https://capec.mitre.org/data/definitions/126.html"
                                target="_blank">CAPEC-126</a>
                         </h3>
                     </FlexboxGrid.Item>

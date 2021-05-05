@@ -105,7 +105,7 @@ export const NavigationSidebar = (): JSX.Element => {
                                         Home
                                     </Nav.Item>
                                     <Dropdown
-                                        eventKey="3"
+                                        eventKey="2"
                                         trigger="hover"
                                         title="SAST"
                                         icon={<Icon icon="code" />}

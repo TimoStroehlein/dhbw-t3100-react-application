@@ -35,13 +35,13 @@ export const SASTCodeInjection = (): JSX.Element => {
                         <h3>
                             <a href="https://cwe.mitre.org/data/definitions/94.html"
                                target="_blank">CWE-94</a> (Rank 17)&nbsp;
-                            <a href="http://capec.mitre.org/data/definitions/242.html"
+                            <a href="https://capec.mitre.org/data/definitions/242.html"
                                target="_blank">CAPEC-242</a>
                         </h3>
                         <h3>
                             <a href="https://cwe.mitre.org/data/definitions/89.html"
                                target="_blank">CWE-89</a> (Rank 6)&nbsp;
-                            <a href="http://capec.mitre.org/data/definitions/66.html"
+                            <a href="https://capec.mitre.org/data/definitions/66.html"
                                target="_blank">CAPEC-66</a>
                         </h3>
                     </FlexboxGrid.Item>
