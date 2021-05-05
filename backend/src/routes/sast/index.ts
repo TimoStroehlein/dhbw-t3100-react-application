@@ -2,6 +2,7 @@ import {Router} from 'express';
 import {addOrder, getOrder, getOrder2, mongoDb} from '../../services/mongodb';
 import * as orders from '../../data/sast/orders.json';
 import {Order, Orders} from '../../models/order';
+import path from 'path';
 
 export const router = Router()
 
@@ -46,4 +47,13 @@ router.route('/orders2')
                 });
             }
         });
-    })
+    });
+
+router.route('/order')
+    .get((req, res) => {
+        const pdfName = req.query.pdfName as string;
+        const rootPath = `${path.dirname(require.main?.filename ?? '')}/data/sast`;
+        const pdfPath = path.join(rootPath, pdfName);
+        console.log(pdfPath);
+        res.download(pdfPath);
+    });

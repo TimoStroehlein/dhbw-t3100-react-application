@@ -21,11 +21,11 @@ const Routes = (): JSX.Element => {
             <Route path="/sast/code-injection">
                 <SASTCodeInjection/>
             </Route>
-            <Route path="/sast/improper-input-validation">
-                <SASTImproperInputValidation/>
-            </Route>
             <Route path="/sast/path-traversal">
                 <SASTPathTraversal/>
+            </Route>
+            <Route path="/sast/improper-input-validation">
+                <SASTImproperInputValidation/>
             </Route>
             <Route path="/dast/vulnerability-1">
                 <DASTVulnerability1Screen/>
@@ -105,7 +105,7 @@ export const NavigationSidebar = (): JSX.Element => {
                                         Home
                                     </Nav.Item>
                                     <Dropdown
-                                        eventKey="3"
+                                        eventKey="2"
                                         trigger="hover"
                                         title="SAST"
                                         icon={<Icon icon="code" />}
@@ -114,11 +114,11 @@ export const NavigationSidebar = (): JSX.Element => {
                                         <Dropdown.Item componentClass={Link} to="/sast/code-injection" eventKey="2-1">
                                             Code Injection
                                         </Dropdown.Item>
-                                        <Dropdown.Item componentClass={Link} to="/sast/improper-input-validation" eventKey="2-2">
-                                            Improper Input Validation
-                                        </Dropdown.Item>
-                                        <Dropdown.Item componentClass={Link} to="/sast/path-traversal" eventKey="2-3">
+                                        <Dropdown.Item componentClass={Link} to="/sast/path-traversal" eventKey="2-2">
                                             Path Traversal
+                                        </Dropdown.Item>
+                                        <Dropdown.Item componentClass={Link} to="/sast/improper-input-validation" eventKey="2-3">
+                                            Improper Input Validation
                                         </Dropdown.Item>
                                     </Dropdown>
                                     <Dropdown

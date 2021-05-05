@@ -1,7 +1,7 @@
-import {Container, FlexboxGrid, Content, Header, Row, Col, Input, Button, List} from 'rsuite';
+import {Container, FlexboxGrid, Content, Header, Col, Input, Button, List, Notification} from 'rsuite';
 import React, {useState} from 'react';
 import './styles.scss';
-import {getOrders} from '../../../services/orders';
+import {postOrders, getOrders} from '../../../services/orders';
 import {Order} from '../../../models/order.type';
 
 export const SASTCodeInjection = (): JSX.Element => {
@@ -9,44 +9,59 @@ export const SASTCodeInjection = (): JSX.Element => {
     const [orderNumber, setOrderNumber] = useState('');
     const [orders, setOrders] = useState(Array<Order>());
 
+    const addOrders = async () => {
+        await postOrders();
+        Notification['success']({
+            title: 'Success',
+            description: 'Data successfully added to the database.'
+        });
+    }
+
     const fetchOrders = async () => {
-        console.log('Test 1');
         const orders = await getOrders(username, orderNumber)
-        console.log('Test 2');
         setOrders(orders);
     }
 
     return (
         <Container>
             <Header>
-                <Row>
-                    <Col xs={12}>
+                <FlexboxGrid>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={10}>
                         <h2>
                             SAST - Code Injection
                         </h2>
-                    </Col>
-                    <Col xs={4} xsPush={8}>
-                        <Row>
-                            <h3>
-                                Rank 17 <a href="https://cwe.mitre.org/data/definitions/94.html"
-                                           target="_blank"
-                                           className="cwe-id">CWE-94</a>
-                            </h3>
-                        </Row>
-                        <Row>
-                            <h3>
-                                Rank 6 <a href="https://cwe.mitre.org/data/definitions/89.html"
-                                          target="_blank"
-                                          className="cwe-id">CWE-89</a>
-                            </h3>
-                        </Row>
-                    </Col>
-                </Row>
+                    </FlexboxGrid.Item>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={14} className="cwe-col">
+                        <h3>
+                            <a href="https://cwe.mitre.org/data/definitions/94.html"
+                               target="_blank">CWE-94</a> (Rank 17)&nbsp;
+                            <a href="https://capec.mitre.org/data/definitions/242.html"
+                               target="_blank">CAPEC-242</a>
+                        </h3>
+                        <h3>
+                            <a href="https://cwe.mitre.org/data/definitions/89.html"
+                               target="_blank">CWE-89</a> (Rank 6)&nbsp;
+                            <a href="https://capec.mitre.org/data/definitions/66.html"
+                               target="_blank">CAPEC-66</a>
+                        </h3>
+                    </FlexboxGrid.Item>
+                </FlexboxGrid>
             </Header>
             <Content>
                 <hr/>
+                <div className="content-grid">
+                    <h4>Data</h4>
+                    <p><b>Username:</b> admin</p>
+                    <p><b>Order Number:</b> kldjkdfjkdf</p>
+                    <Button appearance="primary"
+                            className="button"
+                            onClick={() => addOrders()}>
+                        Add predefined Data
+                    </Button>
+                </div>
+                <hr/>
                 <FlexboxGrid justify="center" className="content-grid">
-                    <FlexboxGrid.Item colspan={8}>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={12} sm={24}>
                         <h3>Orders</h3>
                         <Input placeholder="Username"
                                className="input"
