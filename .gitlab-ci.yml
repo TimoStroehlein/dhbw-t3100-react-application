@@ -25,5 +25,6 @@ include:
 sast:
   stage: test
   variables:
-    SAST_EXCLUDED_ANALYZERS: bandit, brakeman, flawfinder, gosec, kubesec, phpcs-security-audit, pmd-apex,
-    security-code-scan, sobelow, spotbugs
+    SAST_EXCLUDED_ANALYZERS: >
+      bandit, brakeman, flawfinder, gosec, kubesec, phpcs-security-audit, pmd-apex,
+      security-code-scan, sobelow, spotbugs
