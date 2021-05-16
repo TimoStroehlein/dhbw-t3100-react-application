@@ -1,20 +1,26 @@
 import {Container, Content, Header, Form, FormControl, FormGroup, Button, Modal, List} from 'rsuite';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getRecommendations, postRecommendations } from '../../../services/recommendations';
 import './styles.scss';
 
 export const DASTCrossSiteScripting = (): JSX.Element => {
-    // TODO: fetch last links
-    const [ links ] = useState<string[]>([]);
-    const [ link, setLink ] = useState<string>('');
+    const [ recommendations, setRecommendations ] = useState<string[]>([]);
+    const [ recommendation, setRecommendation ] = useState<string>('');
     const [ submitted, setSubmitted ] = useState(false);
 
+    // fetch the saved recommendations on page load
+    useEffect(() =>  {
+        getRecommendations()
+            .then(data => setRecommendations(data));
+    })
+
+    // user submitted a new recommendation
     const submitRecommendation = async () => {
         // send to db
-        // TODO: send to db
-        
-        // success
-        setSubmitted(true);
-        links.push(link)
+        postRecommendations(recommendation)
+            .then(success => setSubmitted(true))
+            .then(success => recommendations.push(recommendation))
+            .catch(error => console.log(error));
     }
 
     return (
@@ -29,7 +35,7 @@ export const DASTCrossSiteScripting = (): JSX.Element => {
                         <FormControl 
                             name="name" 
                             placeholder="Name" 
-                            onChange={(value) => setLink(value)}/>
+                            onChange={(value) => setRecommendation(value)}/>
                     </FormGroup>
                     <FormGroup>
                     <Button 
@@ -40,10 +46,10 @@ export const DASTCrossSiteScripting = (): JSX.Element => {
                     </FormGroup>
                 </Form>
                 <List>
-                    {links.map((link) => (
+                    {recommendations.map((recommendation) => (
                         <List.Item>
                             { /* </List.Item>/<div dangerouslySetInnerHTML={{"__html": link}} */ }
-                            <a href={link}>Recommendation</a>
+                            <a href={recommendation}>Recommendation</a>
                         </List.Item>
                     ))}
                 </List>

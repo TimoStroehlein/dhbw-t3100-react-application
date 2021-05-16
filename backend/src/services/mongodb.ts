@@ -61,3 +61,25 @@ export const addOrder = (db: Db, orders: Orders, callback: (result: InsertWriteO
         callback(result);
     });
 }
+
+// Adds a recommendation string to the DB
+export const addRecommendation = (db: Db, recommendation: string, callback: (result: InsertWriteOpResult<any>) => void): void => {
+    const collection = db.collection('recommendations');
+    collection.insert(recommendation, (err: any, result: any) => {
+        if (err) {
+            console.error('An error occurred.\n', err);
+        }
+        callback(result);
+    });
+}
+
+// Reads all recommendations as string array from DB
+export const getRecommendations = (db: Db, callback: (recommendations: string[]) => void): void => {
+    const collection = db.collection('recommendations');
+    collection.find().toArray((err: any, recommenations: string[]) => {
+        if (err) {
+            console.log('An error occurred.\n', err);
+        }
+        callback(recommenations);
+    });
+}
