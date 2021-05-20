@@ -2,24 +2,25 @@ import {Container, Content, Header, Form, FormControl, FormGroup, Button, Modal,
 import { useEffect, useState } from 'react';
 import { getRecommendations, postRecommendations } from '../../../services/recommendations';
 import './styles.scss';
+import { Recommendation, RecommendationData } from '../../../models/recommendations.type';
 
 export const DASTCrossSiteScripting = (): JSX.Element => {
-    const [ recommendations, setRecommendations ] = useState<string[]>([]);
-    const [ recommendation, setRecommendation ] = useState<string>('');
+    const [ recommendations, setRecommendations ] = useState<Array<Recommendation>>([]);
+    const [ link, setLink ] = useState<string>('');
+    const [ name, setName ] = useState<string>('')
     const [ submitted, setSubmitted ] = useState(false);
 
     // fetch the saved recommendations on page load
     useEffect(() =>  {
         getRecommendations()
-            .then(data => setRecommendations(data));
-    })
+            .then(data => setRecommendations(data))
+    }, [submitted])
 
     // user submitted a new recommendation
     const submitRecommendation = async () => {
         // send to db
-        postRecommendations(recommendation)
+        postRecommendations({ submittedLink: link, submitterName: name})
             .then(success => setSubmitted(true))
-            .then(success => recommendations.push(recommendation))
             .catch(error => console.log(error));
     }
 
@@ -34,8 +35,14 @@ export const DASTCrossSiteScripting = (): JSX.Element => {
                     <FormGroup>
                         <FormControl 
                             name="name" 
-                            placeholder="Name" 
-                            onChange={(value) => setRecommendation(value)}/>
+                            placeholder="Your Name" 
+                            onChange={(value) => setName(value)}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <FormControl 
+                            name="link" 
+                            placeholder="The website you want to recommend" 
+                            onChange={(value) => setLink(value)}/>
                     </FormGroup>
                     <FormGroup>
                     <Button 
@@ -46,10 +53,13 @@ export const DASTCrossSiteScripting = (): JSX.Element => {
                     </FormGroup>
                 </Form>
                 <List>
-                    {recommendations.map((recommendation) => (
-                        <List.Item>
-                            { /* </List.Item>/<div dangerouslySetInnerHTML={{"__html": link}} */ }
-                            <a href={recommendation}>Recommendation</a>
+                    {recommendations.map((recommendation, index) => (
+                        <List.Item key={recommendation.id}>
+                            <div>
+                                { /* <div dangerouslySetInnerHTML={{"__html": link}} /> */ }
+                                <a href={recommendation.data.submittedLink}>Recommendation #{index+1}</a>
+                                <p>by { recommendation.data.submitterName }</p>
+                            </div>
                         </List.Item>
                     ))}
                 </List>
