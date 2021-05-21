@@ -8,7 +8,7 @@ import {HelpScreen} from '../screens/Help';
 import {SASTCodeInjection} from '../screens/SAST/CodeInjection';
 import {SASTPathTraversal} from '../screens/SAST/PathTraversal';
 import {SASTImproperInputValidation} from '../screens/SAST/ImproperInputValidation';
-import {DASTFuzzing} from '../screens/DAST/Fuzzing';
+import {DASTCrossSiteRequestForgery} from '../screens/DAST/CrossSiteRequestForgery';
 import {DASTCrossSiteScripting} from '../screens/DAST/CrossSiteScripting';
 import {DASTSqlInjection} from '../screens/DAST/SqlInjection';
 
@@ -30,8 +30,8 @@ const Routes = (): JSX.Element => {
             <Route path="/dast/cross-site-scripting">
                 <DASTCrossSiteScripting/>
             </Route>
-            <Route path="/dast/fuzzing">
-                <DASTFuzzing/>
+            <Route path="/dast/Cross-site-request-forgery">
+                <DASTCrossSiteRequestForgery/>
             </Route>
             <Route path="/dast/sql-injection">
                 <DASTSqlInjection/>
@@ -131,8 +131,8 @@ export const NavigationSidebar = (): JSX.Element => {
                                         <Dropdown.Item componentClass={Link} to="/dast/cross-site-scripting" eventKey="3-1">
                                             Cross-Site Scripting (XSS)
                                         </Dropdown.Item>
-                                        <Dropdown.Item componentClass={Link} to="/dast/fuzzing" eventKey="3-2">
-                                            Fuzzing
+                                        <Dropdown.Item componentClass={Link} to="/dast/cross-site-request-forgery" eventKey="3-2">
+                                            Cross Site Request Forgery
                                         </Dropdown.Item>
                                         <Dropdown.Item componentClass={Link} to="/dast/sql-injection" eventKey="3-3">
                                             SQL Injection
