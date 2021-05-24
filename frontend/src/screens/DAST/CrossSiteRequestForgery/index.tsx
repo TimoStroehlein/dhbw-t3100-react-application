@@ -1,4 +1,4 @@
-import {Button, Container, Content, Form, FormControl, FormGroup, Header, Modal} from 'rsuite';
+import {Button, Container, Content, Form, FormControl, FormGroup, Header } from 'rsuite';
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { checkSession, checkLogin, setSession, changePassword } from '../../../services/sessions';
@@ -7,9 +7,6 @@ export const DASTCrossSiteRequestForgery = (): JSX.Element => {
     const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);
     const [ username, setUsername ] = useState<string>('');
     const [ password, setPassword ] = useState<string>('');
-
-
-    const [ isPasswordChanged, setIsPasswordChanged ] = useState<boolean>(false);
     const [ newPassword, setNewPassword ] = useState<string>('');
 
     useEffect(() => {
@@ -21,17 +18,24 @@ export const DASTCrossSiteRequestForgery = (): JSX.Element => {
         if(await checkLogin(username, password)) {
             console.log('Login valid.')
             setSession(username)
-                .then(result => setIsLoggedIn(result))
+                .then(result => {
+                    setIsLoggedIn(result);
+                    result ? alert('You are now logged in.') : alert('Username and/or password are wrong.');
+                })
                 .finally(() => console.log('Session handled.'))
         }
+        else alert('Username and/or password are wrong.')
     }
 
     const changePasswordPressed = async () => {
         if(await checkSession() && newPassword != '') {
             console.log('Session and new password valid.')
             changePassword(newPassword)
-            .then(result => setIsPasswordChanged(result))
+            .then(result => {
+                result ? alert('Your password was successfully changed.') : alert('Your password could not be changed.');
+            })
             .finally(() => console.log('Password change handled.'))
+            
         }
     }
 

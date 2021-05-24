@@ -2,7 +2,7 @@ import {Container, Content, Header, Form, FormControl, FormGroup, Button, Modal,
 import { useEffect, useState } from 'react';
 import { getRecommendations, postRecommendations } from '../../../services/recommendations';
 import './styles.scss';
-import { Recommendation, RecommendationData } from '../../../models/recommendations.type';
+import { Recommendation } from '../../../models/recommendations.type';
 
 export const DASTCrossSiteScripting = (): JSX.Element => {
     const [ recommendations, setRecommendations ] = useState<Array<Recommendation>>([]);
@@ -20,7 +20,7 @@ export const DASTCrossSiteScripting = (): JSX.Element => {
     const submitRecommendation = async () => {
         // send to db
         postRecommendations({ submittedLink: link, submitterName: name})
-            .then(success => setSubmitted(true))
+            .then(() => setSubmitted(true))
             .catch(error => console.log(error));
     }
 
