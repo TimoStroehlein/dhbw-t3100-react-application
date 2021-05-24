@@ -3,6 +3,7 @@ import {Order, Orders} from '../models/order';
 import { Recommendation, Recommendations } from '../models/recommendation';
 import { Session } from '../models/session';
 import { User } from '../models/user';
+import { comparePassword, hashPassword } from './security';
 
 export const mongoClient = (): MongoClient => {
     const isset = process.env.MONGO_INITDB_USERNAME && process.env.MONGO_INITDB_PASSWORD;
@@ -121,23 +122,27 @@ export const unsetSession = (db: Db, sessionId: string, callback: (result: Delet
     });
 }
 
-export const checkUser = (db: Db, user: User, callback: (foundUser: User) => void): void => {
+export const checkUser = (db: Db, user: User, callback: (result: boolean) => void): void => {
     const collection = db.collection('users');
-    const query = { username: user.username, password: user.password};
+    const query = { username: user.username };
+    console.log(query)
     collection.findOne(query, (error: any, foundUser: any) => {
         if (error) {
             console.log('An error occurred.\n', error);
         }
-        callback(foundUser);
+        if(!foundUser) return false;
+        const result = comparePassword(user.password, foundUser.password)
+        console.log(result)
+        callback(result);
     });
 }
 
 
 // Changes a password of a given user
-export const changePassword = (db: Db, userData: User, callback: (result: UpdateWriteOpResult) => void): void => {
+export const changePassword = (db: Db, userData: any, callback: (result: UpdateWriteOpResult) => void): void => {
     const collection = db.collection('users');
-    const query = {username: userData.username};
-    const newValue = { $set: { password: userData.password }}
+    const query = { username: userData.data.username, sessionId: userData.data.sessionId };
+    const newValue = { $set: { password: hashPassword(userData.data.newPassword) }}
     collection.updateOne(query, newValue, (err, result) => {
         if (err) {
             console.log('An error occurred.\n', err);

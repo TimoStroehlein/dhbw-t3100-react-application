@@ -104,24 +104,23 @@ router.route('/user')
             if (err) {
                 res.json(err);
             } else if (db) {
-                checkUser(db, user, (result: User) => {
+                checkUser(db, user, (result: boolean) => {
                     res.header('Access-Control-Allow-Origin', '*');
-                    res.json({ 'success': result ? true : false})
+                    res.json({ 'success': result })
                 });
             }
         });
     })
     .post((req, res) => {
-        console.log(req.body)
         const userData = req.body;
         console.log(userData)
         mongoDb((db, err) => {
             if (err) {
                 res.json(err);
             } else if (db) {
-                changePassword(db, userData as User, (result: any) => {
+                changePassword(db, userData, (result: any) => {
                     console.log(result)
-                    res.json({'success': result.result.ok == 1 ? true : false });
+                    res.json({'success': result.result.n == 1 ? true : false });
                 });
             }
         });

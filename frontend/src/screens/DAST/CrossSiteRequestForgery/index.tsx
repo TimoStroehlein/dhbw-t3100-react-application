@@ -1,7 +1,7 @@
 import {Button, Container, Content, Form, FormControl, FormGroup, Header } from 'rsuite';
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
-import { checkSession, checkLogin, setSession, changePassword } from '../../../services/sessions';
+import { checkSession, checkLogin, setSession, changePassword, unsetSession } from '../../../services/sessions';
 
 export const DASTCrossSiteRequestForgery = (): JSX.Element => {
     const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);
@@ -33,6 +33,8 @@ export const DASTCrossSiteRequestForgery = (): JSX.Element => {
             changePassword(newPassword)
             .then(result => {
                 result ? alert('Your password was successfully changed.') : alert('Your password could not be changed.');
+                unsetSession();
+                setIsLoggedIn(false);
             })
             .finally(() => console.log('Password change handled.'))
             
