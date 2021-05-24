@@ -8,3 +8,6 @@ db.createUser({
         }
     ]
 });
+
+db.createCollection('users', { capped: false });
+db.users.insert({ 'username': 'admin', 'password': 'password'});
