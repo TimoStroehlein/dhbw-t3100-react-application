@@ -32,4 +32,9 @@ The Code Injection site contains a button to add the predefined data, which need
 
 The Path Traversal vulnerability does not require any particular setup. The vulnerability can be tested directly. 
 
+The testing results can be seen on SonarCloud and Snyk:
+
+https://sonarcloud.io/dashboard?id=dhbw-t3100-react-application
+https://app.snyk.io/org/timostroehlein (access request required)
+
 ## DAST
