@@ -7,9 +7,9 @@ import {HomeScreen} from '../screens/Home';
 import {HelpScreen} from '../screens/Help';
 import {SASTCodeInjection} from '../screens/SAST/CodeInjection';
 import {SASTPathTraversal} from '../screens/SAST/PathTraversal';
-import {DASTVulnerability1Screen} from '../screens/DAST/Vulnerability1';
-import {DASTVulnerability2Screen} from '../screens/DAST/Vulnerability2';
-import {DASTVulnerability3Screen} from '../screens/DAST/Vulnerability3';
+import {DASTCrossSiteRequestForgery} from '../screens/DAST/CrossSiteRequestForgery';
+import {DASTCrossSiteScripting} from '../screens/DAST/CrossSiteScripting';
+import {DASTSqlInjection} from '../screens/DAST/SqlInjection';
 
 const Routes = (): JSX.Element => {
     return (
@@ -23,14 +23,14 @@ const Routes = (): JSX.Element => {
             <Route path="/sast/path-traversal">
                 <SASTPathTraversal/>
             </Route>
-            <Route path="/dast/vulnerability-1">
-                <DASTVulnerability1Screen/>
+            <Route path="/dast/cross-site-scripting">
+                <DASTCrossSiteScripting/>
             </Route>
-            <Route path="/dast/vulnerability-2">
-                <DASTVulnerability2Screen/>
+            <Route path="/dast/Cross-site-request-forgery">
+                <DASTCrossSiteRequestForgery/>
             </Route>
-            <Route path="/dast/vulnerability-3">
-                <DASTVulnerability3Screen/>
+            <Route path="/dast/sql-injection">
+                <DASTSqlInjection/>
             </Route>
             <Route path="/settings">
                 <SettingsScreen/>
@@ -121,14 +121,14 @@ export const NavigationSidebar = (): JSX.Element => {
                                         icon={<Icon icon="shield" />}
                                         placement="rightStart"
                                     >
-                                        <Dropdown.Item componentClass={Link} to="/dast/vulnerability-1" eventKey="3-1">
-                                            Vulnerability 1
+                                        <Dropdown.Item componentClass={Link} to="/dast/cross-site-scripting" eventKey="3-1">
+                                            Cross-Site Scripting (XSS)
                                         </Dropdown.Item>
-                                        <Dropdown.Item componentClass={Link} to="/dast/vulnerability-2" eventKey="3-2">
-                                            Vulnerability 2
+                                        <Dropdown.Item componentClass={Link} to="/dast/cross-site-request-forgery" eventKey="3-2">
+                                            Cross Site Request Forgery
                                         </Dropdown.Item>
-                                        <Dropdown.Item componentClass={Link} to="/dast/vulnerability-3" eventKey="3-3">
-                                            Vulnerability 3
+                                        <Dropdown.Item componentClass={Link} to="/dast/sql-injection" eventKey="3-3">
+                                            SQL Injection
                                         </Dropdown.Item>
                                     </Dropdown>
                                 </Nav>
