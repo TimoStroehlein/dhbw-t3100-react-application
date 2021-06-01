@@ -4,7 +4,7 @@ services:
     build: ./frontend
     image: timostroehlein/dhbw-t3100-frontend
     container_name: dhbw-t3100-frontend
-    command: npm run start
+    command: bash -c "npm rebuild node-sass && npm run start"
     volumes:
       - type: bind
         source: ./frontend
