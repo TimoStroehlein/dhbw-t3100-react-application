@@ -5,4 +5,5 @@ export interface Orders {
 export interface Order {
     username: string;
     orderNumber: string;
+    superSecret: string;
 }

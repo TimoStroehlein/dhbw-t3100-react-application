@@ -78,6 +78,19 @@ export const SASTCodeInjection = (): JSX.Element => {
                 </FlexboxGrid>
                 <hr/>
                 <List>
+                    <List.Item>
+                        <FlexboxGrid justify="center">
+                            <FlexboxGrid.Item colspan={4}>
+                                <b>Username</b>
+                            </FlexboxGrid.Item>
+                            <FlexboxGrid.Item colspan={4}>
+                                <b>Order Number</b>
+                            </FlexboxGrid.Item>
+                            <FlexboxGrid.Item colspan={4}>
+                                <b>Super Secret</b>
+                            </FlexboxGrid.Item>
+                        </FlexboxGrid>
+                    </List.Item>
                     {orders.map((order) => (
                         <List.Item>
                             <FlexboxGrid justify="center">
@@ -86,6 +99,9 @@ export const SASTCodeInjection = (): JSX.Element => {
                                 </FlexboxGrid.Item>
                                 <FlexboxGrid.Item colspan={4}>
                                     {order.orderNumber}
+                                </FlexboxGrid.Item>
+                                <FlexboxGrid.Item colspan={4}>
+                                    {order.superSecret}
                                 </FlexboxGrid.Item>
                             </FlexboxGrid>
                         </List.Item>

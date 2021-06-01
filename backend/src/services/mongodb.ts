@@ -51,18 +51,19 @@ export const getOrder2 = (db: Db, username: string, password: string, callback: 
 
 export const addOrder = (db: Db, orders: Orders, callback: (result: InsertWriteOpResult<any>) => void): void => {
     const collection = db.collection('orders');
-    collection.deleteMany({}, (err, result) => {
+    collection.deleteMany({}, (err) => {
         if (err) {
             console.error('An error occurred.\n', err);
             return;
         }
-        console.log(`Successfully removed ${result.result.n} documents.`);
-    });
-    collection.insertMany(orders.orders, (err, result) => {
-        if (err) {
-            console.error('An error occurred.\n', err);
-        }
-        callback(result);
+
+        collection.insertMany(orders.orders, (err, result) => {
+            if (err) {
+                console.error('An error occurred.\n', err);
+            }
+            console.log(`Successfully inserted ${result.result.n} documents.`);
+            callback(result);
+        });
     });
 }
 

@@ -2,19 +2,23 @@
   "orders": [
     {
       "username": "admin",
-      "orderNumber": "kldjkdfjkdf"
+      "orderNumber": "kldjkdfjkdf",
+      "superSecret": "why are you doing this to me"
     },
     {
       "username": "Hans",
-      "orderNumber": "mkfsfklfsdl"
+      "orderNumber": "mkfsfklfsdl",
+      "superSecret": "pls don't hack me"
     },
     {
       "username": "Bernd",
-      "orderNumber": "dsnndfkngdf"
+      "orderNumber": "dsnndfkngdf",
+      "superSecret": "nothing to see here"
     },
     {
-      "username": "Manfred",
-      "orderNumber": "nkfsdnjdsfkn"
+      "username": "John Cena",
+      "orderNumber": "nkfsdnjdsfkn",
+      "superSecret": "and his name is"
     }
   ]
 }

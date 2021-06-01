@@ -34,6 +34,7 @@ export const SASTPathTraversal = (): JSX.Element => {
                 <div className="content-grid">
                     <h4>Data</h4>
                     <p><b>Order ID:</b> f2e71bcb-152e-4a23-ab72-6d7f6022ed60</p>
+                    <p><b>Hint:</b> Inspect the website within the browser and search for the keyword pdf</p>
                 </div>
                 <hr/>
                 <FlexboxGrid justify="center" className="content-grid">
@@ -41,7 +42,7 @@ export const SASTPathTraversal = (): JSX.Element => {
                         <h3>Download Order PDF</h3>
                         <Input placeholder="Order ID"
                                className="input"
-                               onChange={(value) => setOrderPdf(value)}/>
+                               onChange={(value) => setOrderPdf(value + '.pdf')}/>
                         <Button appearance="primary"
                                 className="button"
                                 onClick={() => downloadOrderPdf()}>

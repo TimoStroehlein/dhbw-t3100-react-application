@@ -7,7 +7,6 @@ import {HomeScreen} from '../screens/Home';
 import {HelpScreen} from '../screens/Help';
 import {SASTCodeInjection} from '../screens/SAST/CodeInjection';
 import {SASTPathTraversal} from '../screens/SAST/PathTraversal';
-import {SASTImproperInputValidation} from '../screens/SAST/ImproperInputValidation';
 import {DASTCrossSiteRequestForgery} from '../screens/DAST/CrossSiteRequestForgery';
 import {DASTCrossSiteScripting} from '../screens/DAST/CrossSiteScripting';
 import {DASTSqlInjection} from '../screens/DAST/SqlInjection';
@@ -23,9 +22,6 @@ const Routes = (): JSX.Element => {
             </Route>
             <Route path="/sast/path-traversal">
                 <SASTPathTraversal/>
-            </Route>
-            <Route path="/sast/improper-input-validation">
-                <SASTImproperInputValidation/>
             </Route>
             <Route path="/dast/cross-site-scripting">
                 <DASTCrossSiteScripting/>
@@ -116,9 +112,6 @@ export const NavigationSidebar = (): JSX.Element => {
                                         </Dropdown.Item>
                                         <Dropdown.Item componentClass={Link} to="/sast/path-traversal" eventKey="2-2">
                                             Path Traversal
-                                        </Dropdown.Item>
-                                        <Dropdown.Item componentClass={Link} to="/sast/improper-input-validation" eventKey="2-3">
-                                            Improper Input Validation
                                         </Dropdown.Item>
                                     </Dropdown>
                                     <Dropdown
