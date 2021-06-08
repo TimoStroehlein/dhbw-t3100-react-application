@@ -38,3 +38,8 @@ https://sonarcloud.io/dashboard?id=dhbw-t3100-react-application
 https://app.snyk.io/org/timostroehlein (access request required)
 
 ## DAST
+The DAST part of the website allows users to recommend a link to a website. It requires the user to enter their name and a link to a website they want to recommend. Upon recommending, the recommendation is displayed for everyone using the application.
+
+It also allows users to access a special authorized page. It requires a username and a password. A default user "admin" with the "password" is created for testing purposes. Logged in users gain access to the "Change Password" functions.
+
+Automated DAST is done with OWASP ZAP integrated in GitLab.

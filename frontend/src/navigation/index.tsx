@@ -9,7 +9,6 @@ import {SASTCodeInjection} from '../screens/SAST/CodeInjection';
 import {SASTPathTraversal} from '../screens/SAST/PathTraversal';
 import {DASTCrossSiteRequestForgery} from '../screens/DAST/CrossSiteRequestForgery';
 import {DASTCrossSiteScripting} from '../screens/DAST/CrossSiteScripting';
-import {DASTSqlInjection} from '../screens/DAST/SqlInjection';
 
 const Routes = (): JSX.Element => {
     return (
@@ -28,9 +27,6 @@ const Routes = (): JSX.Element => {
             </Route>
             <Route path="/dast/Cross-site-request-forgery">
                 <DASTCrossSiteRequestForgery/>
-            </Route>
-            <Route path="/dast/sql-injection">
-                <DASTSqlInjection/>
             </Route>
             <Route path="/settings">
                 <SettingsScreen/>
@@ -126,9 +122,6 @@ export const NavigationSidebar = (): JSX.Element => {
                                         </Dropdown.Item>
                                         <Dropdown.Item componentClass={Link} to="/dast/cross-site-request-forgery" eventKey="3-2">
                                             Cross Site Request Forgery
-                                        </Dropdown.Item>
-                                        <Dropdown.Item componentClass={Link} to="/dast/sql-injection" eventKey="3-3">
-                                            SQL Injection
                                         </Dropdown.Item>
                                     </Dropdown>
                                 </Nav>
